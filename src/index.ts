@@ -1,28 +1,46 @@
 import express from 'express';
-
-import { Server } from 'socket.io';
-import { createServer } from 'node:http';
+import path from 'node:path';
 
 const app = express();
-const server = createServer(app);
-const io = new Server(server);
-
-io.on('connection', (socket) => {
-    console.log('Un usuario se ha conectado!');
-
-    socket.on('disconnect', () => {
-        console.log('Un usuario se ha desconectado!');
-    });
-});
-
 const PORT = process.env.PORT ?? 3000;
 
 app.use(express.json());
 
-app.get('/', (_req, res) => {
-    res.sendFile(process.cwd() + '/client/index.html');
+app.use(express.static(path.join(__dirname, '..', 'client')));
+
+interface Tarea {
+    id: number;
+    titulo: string;
+    completada: boolean;
+}
+
+const tareas: Tarea[] = [];
+let siguienteId = 1;
+
+app.get('/tareas', (_req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'client', 'tareas', 'index.html'));
 });
 
-server.listen(PORT, () => {
-    console.log(`Escuchando en http://localhost:${PORT}`);
+app.get('/api/tareas', (_req, res) => {
+    res.json(tareas);
+});
+
+app.post('/api/tareas', (req, res) => {
+    const { titulo } = req.body as { titulo: string };
+
+    if (typeof titulo !== 'string' || titulo.trim() === '') {
+        return res.status(400).json({ error: 'El título es obligatorio' });
+    }
+
+    const nuevaTarea: Tarea = {
+        id: siguienteId++,
+        titulo: titulo,
+        completada: false,
+    };
+    tareas.push(nuevaTarea);
+    res.status(201).json(nuevaTarea);
+});
+
+app.listen(PORT, () => {
+    console.log('Escuchando en localhost:' + PORT);
 });
