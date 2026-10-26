@@ -1,12 +1,19 @@
 import express from 'express';
 import path from 'node:path';
+import dotenv from 'dotenv';
+
+import taskRoutes from './Routes/tareas';
+
+import { connectDB } from './db';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '..', 'client')));
+app.use(express.static(path.join(__dirname, 'client')));
 
 interface Tarea {
     id: number;
@@ -17,8 +24,10 @@ interface Tarea {
 const tareas: Tarea[] = [];
 let siguienteId = 1;
 
-app.get('/tareas', (_req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'client', 'tareas', 'index.html'));
+app.use('/tareas', taskRoutes);
+
+app.get('/', (_req, res) => {
+    res.send('SSTIE API/Welcome!');
 });
 
 app.get('/api/tareas', (_req, res) => {
@@ -41,6 +50,11 @@ app.post('/api/tareas', (req, res) => {
     res.status(201).json(nuevaTarea);
 });
 
-app.listen(PORT, () => {
-    console.log('Escuchando en localhost:' + PORT);
-});
+const startServer = async () => {
+    await connectDB();
+    app.listen(PORT, () => {
+        console.log(`Escuchando en http://localhost:${PORT}`);
+    });
+};
+
+startServer();
