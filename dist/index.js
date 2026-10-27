@@ -7,18 +7,20 @@ const express_1 = __importDefault(require("express"));
 const node_path_1 = __importDefault(require("node:path"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const tareas_1 = __importDefault(require("./Routes/tareas"));
+const reportes_1 = __importDefault(require("./Routes/reportes"));
 const db_1 = require("./db");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT ?? 3000;
 app.use(express_1.default.json());
+app.get('/', (_req, res) => {
+    res.send('SSTIE API/Welcome!');
+});
 app.use(express_1.default.static(node_path_1.default.join(__dirname, 'client')));
 const tareas = [];
 let siguienteId = 1;
 app.use('/tareas', tareas_1.default);
-app.get('/', (_req, res) => {
-    res.send('SSTIE API/Welcome!');
-});
+app.use('/reportes', reportes_1.default);
 app.get('/api/tareas', (_req, res) => {
     res.json(tareas);
 });

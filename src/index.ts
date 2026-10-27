@@ -3,6 +3,7 @@ import path from 'node:path';
 import dotenv from 'dotenv';
 
 import taskRoutes from './Routes/tareas';
+import rutaReportes from './Routes/reportes';
 
 import { connectDB } from './db';
 
@@ -12,6 +13,10 @@ const app = express();
 const PORT = process.env.PORT ?? 3000;
 
 app.use(express.json());
+
+app.get('/', (_req, res) => {
+    res.send('SSTIE API/Welcome!');
+});
 
 app.use(express.static(path.join(__dirname, 'client')));
 
@@ -26,9 +31,7 @@ let siguienteId = 1;
 
 app.use('/tareas', taskRoutes);
 
-app.get('/', (_req, res) => {
-    res.send('SSTIE API/Welcome!');
-});
+app.use('/reportes', rutaReportes);
 
 app.get('/api/tareas', (_req, res) => {
     res.json(tareas);
