@@ -1,24 +1,22 @@
 import express from 'express';
 import path from 'node:path';
 import dotenv from 'dotenv';
-
 import taskRoutes from './Routes/tareas';
 import rutaReportes from './Routes/reportes';
-
 import { connectDB } from './db';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (_req, res) => {
     res.send('SSTIE API/Welcome!');
 });
-
-app.use(express.static(path.join(__dirname, 'client')));
 
 interface Tarea {
     id: number;
@@ -36,6 +34,8 @@ app.use('/reportes', rutaReportes);
 app.get('/api/tareas', (_req, res) => {
     res.json(tareas);
 });
+
+app.use(express.static(path.join(__dirname, 'client')));
 
 app.post('/api/tareas', (req, res) => {
     const { titulo } = req.body as { titulo: string };
