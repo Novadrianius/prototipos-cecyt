@@ -18,27 +18,12 @@ app.use(express_1.default.json());
 app.get('/', (_req, res) => {
     res.send('SSTIE API/Welcome!');
 });
-const tareas = [];
-let siguienteId = 1;
+// Conectar rutas
 app.use('/tareas', tareas_1.default);
 app.use('/reportes', reportes_1.default);
-app.get('/api/tareas', (_req, res) => {
-    res.json(tareas);
-});
+app.use('/tareas', tareas_1.default);
 app.use(express_1.default.static(node_path_1.default.join(__dirname, 'client')));
-app.post('/api/tareas', (req, res) => {
-    const { titulo } = req.body;
-    if (typeof titulo !== 'string' || titulo.trim() === '') {
-        return res.status(400).json({ error: 'El título es obligatorio' });
-    }
-    const nuevaTarea = {
-        id: siguienteId++,
-        titulo: titulo,
-        completada: false,
-    };
-    tareas.push(nuevaTarea);
-    res.status(201).json(nuevaTarea);
-});
+// Llamar función que conecta base de datos
 const startServer = async () => {
     await (0, db_1.connectDB)();
     app.listen(PORT, () => {

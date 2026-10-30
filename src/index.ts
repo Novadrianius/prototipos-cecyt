@@ -18,41 +18,14 @@ app.get('/', (_req, res) => {
     res.send('SSTIE API/Welcome!');
 });
 
-interface Tarea {
-    id: number;
-    titulo: string;
-    completada: boolean;
-}
-
-const tareas: Tarea[] = [];
-let siguienteId = 1;
-
+// Conectar rutas
 app.use('/tareas', taskRoutes);
-
 app.use('/reportes', rutaReportes);
-
-app.get('/api/tareas', (_req, res) => {
-    res.json(tareas);
-});
+app.use('/tareas', taskRoutes);
 
 app.use(express.static(path.join(__dirname, 'client')));
 
-app.post('/api/tareas', (req, res) => {
-    const { titulo } = req.body as { titulo: string };
-
-    if (typeof titulo !== 'string' || titulo.trim() === '') {
-        return res.status(400).json({ error: 'El título es obligatorio' });
-    }
-
-    const nuevaTarea: Tarea = {
-        id: siguienteId++,
-        titulo: titulo,
-        completada: false,
-    };
-    tareas.push(nuevaTarea);
-    res.status(201).json(nuevaTarea);
-});
-
+// Llamar función que conecta base de datos
 const startServer = async () => {
     await connectDB();
     app.listen(PORT, () => {

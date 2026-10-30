@@ -38,11 +38,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
 const node_path_1 = __importDefault(require("node:path"));
+const TaskService_1 = require("../Services/TaskService");
 const router = (0, express_1.Router)();
 router.use(express_1.default.json());
-router.use(express_1.default.static(node_path_1.default.join(__dirname, 'client')));
 router.get('/', (_req, res) => {
     res.sendFile(node_path_1.default.join(__dirname, '..', 'client', 'tareas', 'index.html'));
 });
+router.get('/api', (_req, res) => {
+    (0, TaskService_1.getTask)(res);
+});
+router.post('/api', TaskService_1.addTask);
+router.use(express_1.default.static(node_path_1.default.join(__dirname, 'client')));
 exports.default = router;
 //# sourceMappingURL=tareas.js.map
