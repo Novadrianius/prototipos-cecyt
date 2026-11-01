@@ -8,6 +8,7 @@ const node_path_1 = __importDefault(require("node:path"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const tareas_1 = __importDefault(require("./Routes/tareas"));
 const reportes_1 = __importDefault(require("./Routes/reportes"));
+const presentacion_1 = __importDefault(require("./Routes/presentacion"));
 const db_1 = require("./db");
 const cors_1 = __importDefault(require("cors"));
 dotenv_1.default.config();
@@ -22,7 +23,12 @@ app.get('/', (_req, res) => {
 app.use('/tareas', tareas_1.default);
 app.use('/reportes', reportes_1.default);
 app.use('/tareas', tareas_1.default);
+app.use('/presentacion', presentacion_1.default);
 app.use('/client', express_1.default.static(node_path_1.default.join(__dirname, '../client')));
+app.use('/public-assets', express_1.default.static(node_path_1.default.join(__dirname, '../public-assets')));
+app.use((_req, res) => {
+    res.status(404).sendFile(node_path_1.default.join(__dirname, '../client/not-found/index.html'));
+});
 // Llamar función que conecta base de datos
 const startServer = async () => {
     await (0, db_1.connectDB)();

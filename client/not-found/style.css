@@ -1,0 +1,45 @@
+* {
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+#nav_bar {
+    width: 100%;
+    height: 65px;
+    background-color: rgb(112, 5, 34);
+    color: #FFF;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+#nav_title {
+    margin: 0 8px;
+}
+
+#nav_title:hover {
+    cursor: pointer;
+}
+
+#title {
+    margin: 16px 8px;
+    text-align: center;
+    color: #444;
+    font-size: 42px;
+}
+
+.container {
+    width: 100%;
+    height: 350px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+.not_found_image {
+    width: 250px;
+}
