@@ -7,7 +7,7 @@ const router = Router();
 router.use(express.json());
 
 router.get('/', (_req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'client', 'tareas', 'index.html'));
+    res.sendFile(path.join(__dirname, '../../client/tareas/index.html'));
 });
 
 router.get('/api', (_req, res) => {
@@ -15,7 +15,5 @@ router.get('/api', (_req, res) => {
 });
 
 router.post('/api', addTask);
-
-router.use(express.static(path.join(__dirname, 'client')));
 
 export default router;

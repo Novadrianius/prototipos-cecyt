@@ -44,7 +44,7 @@ router.use(express_1.default.json());
 router.get('/', ReportingService_1.getReports);
 router.get('/view', (_req, res) => {
     // Mandar página visual al cliente
-    res.sendFile(node_path_1.default.join(__dirname, '..', 'client', 'reportes', 'index.html'));
+    res.sendFile(node_path_1.default.join(__dirname, '..', '..', 'client', 'reportes', 'index.html'));
 });
 router.post('/', ReportingService_1.saveReport);
 exports.default = router;

@@ -11,7 +11,7 @@ router.get('/', getReports);
 router.get('/view', (_req, res) => {
     // Mandar página visual al cliente
     res.sendFile(
-        path.join(__dirname, '..', 'client', 'reportes', 'index.html'),
+        path.join(__dirname, '..', '..', 'client', 'reportes', 'index.html'),
     );
 });
 

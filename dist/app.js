@@ -22,7 +22,7 @@ app.get('/', (_req, res) => {
 app.use('/tareas', tareas_1.default);
 app.use('/reportes', reportes_1.default);
 app.use('/tareas', tareas_1.default);
-app.use(express_1.default.static(node_path_1.default.join(__dirname, 'client')));
+app.use('/client', express_1.default.static(node_path_1.default.join(__dirname, '../client')));
 // Llamar función que conecta base de datos
 const startServer = async () => {
     await (0, db_1.connectDB)();
@@ -31,4 +31,4 @@ const startServer = async () => {
     });
 };
 startServer();
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=app.js.map

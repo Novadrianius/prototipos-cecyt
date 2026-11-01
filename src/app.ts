@@ -23,7 +23,7 @@ app.use('/tareas', taskRoutes);
 app.use('/reportes', rutaReportes);
 app.use('/tareas', taskRoutes);
 
-app.use(express.static(path.join(__dirname, 'client')));
+app.use('/client', express.static(path.join(__dirname, '../client')));
 
 // Llamar función que conecta base de datos
 const startServer = async () => {

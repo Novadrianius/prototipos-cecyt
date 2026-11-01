@@ -51,6 +51,7 @@ reportingForm.addEventListener('submit', (evt) => {
 
         // Empezar a registrar reporte de forma asíncrona
         crearReporte(reportData);
+        console.log(report);
 
         // Reiniciar campos de texto (limpieza de formulario)
         reportingField.value = '';
