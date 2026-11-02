@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import taskRoutes from './Routes/tareas';
 import rutaReportes from './Routes/reportes';
 import rutaPresentacion from './Routes/presentacion';
+import rutaRegistro from './Routes/registro';
 import { connectDB } from './db';
 import cors from 'cors';
 
@@ -23,6 +24,7 @@ app.get('/', (_req, res) => {
 app.use('/tareas', taskRoutes);
 app.use('/reportes', rutaReportes);
 app.use('/tareas', taskRoutes);
+app.use('/registro', rutaRegistro);
 app.use('/presentacion', rutaPresentacion);
 
 app.use('/client', express.static(path.join(__dirname, '../client')));
