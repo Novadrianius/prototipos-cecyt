@@ -38,10 +38,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
 const node_path_1 = __importDefault(require("node:path"));
+const RegisterService_1 = require("../Services/RegisterService");
 const router = (0, express_1.Router)();
 router.use(express_1.default.json());
 router.get('/', (_req, res) => {
     res.sendFile(node_path_1.default.join(__dirname, '../../client/registro/index.html'));
 });
+router.get('/api', (_req, res) => {
+    (0, RegisterService_1.obtenerUsuarios)(res);
+});
+router.post('/api', RegisterService_1.registrarUsuario);
 exports.default = router;
 //# sourceMappingURL=registro.js.map

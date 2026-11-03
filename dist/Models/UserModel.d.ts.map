@@ -1,1 +1,1 @@
-{"version":3,"file":"UserModel.d.ts","sourceRoot":"","sources":["../../src/Models/UserModel.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,QAAQ,EAAE,MAAM,kBAAkB,CAAC;AAiB5C,QAAA,MAAM,SAAS;;;;;;;;;;EAAsC,CAAC;eAEvC,SAAS"}
+{"version":3,"file":"UserModel.d.ts","sourceRoot":"","sources":["../../src/Models/UserModel.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,QAAQ,EAAE,MAAM,kBAAkB,CAAC;AAiB5C,eAAO,MAAM,SAAS;;;;;;;;;;EAAsC,CAAC"}

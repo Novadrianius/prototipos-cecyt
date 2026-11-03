@@ -16,6 +16,4 @@ const userSchema = new Schema<IUsuario>(
     { timestamps: true }, // Agrega la fecha en la que se hizo el registro y la fecha en que se actualizó el registro
 );
 
-const userModel = model<IUsuario>('User', userSchema);
-
-export default userModel;
+export const userModel = model<IUsuario>('User', userSchema);
