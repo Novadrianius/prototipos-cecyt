@@ -25,6 +25,10 @@ Y como lenguajes para el desarrollo del proyecto, tenemos:
 - JavaScript
 - TypeScript
 
+# Uso de cada lenguaje y tecnología
+
+**Android Studio** y **Visual Studio Code** son dos programas que se usaron para el **desarrollo ágil de la aplicación, página web y el servidor del SSTIE**. Gracias a estas tecnologías, se pudo desarrollar con cierta comodidad el proyecto.
+
 ```typescript
 const calcAreaCir = (radio: number) => Math.PI * Math.pow(radio, 2);
 
